@@ -176,8 +176,27 @@ def select_10():
     return result
 
 
+
+
+def select_11():
+    """
+    SELECT t.teacher, s.student, ROUND(AVG(m.mark), 2) as avgMark
+    FROM marks m
+    INNER JOIN students s ON s.id = m.student_id 
+    INNER JOIN subjects s2 ON s2.id = m.subject_id 
+    INNER JOIN teachers t ON t.id = s2.teacher_id  
+    WHERE m.student_id = 2 AND s2.teacher_id  = 2
+    """
+  
+    result = session.query(Student.student_name, Teacher.fullname, func.avg(Grade.grade)) \
+    .select_from(Grade).join(Student).join(Subject).join(Teacher).filter(Student.id == 2).filter(Teacher.id == 2) \
+    .group_by(Student).group_by(Teacher).all()
+
+    return result
+
+
 if __name__ == '__main__':
-    print(select_01())
+    # print(select_01())
     # print(select_02())
     # print(select_03())
     # print(select_04()) 
@@ -187,3 +206,5 @@ if __name__ == '__main__':
     # print(select_08())
     # print(select_09())
     # print(select_10())
+    print(select_11())
+    # print(select_12())
