@@ -1,4 +1,3 @@
-import random  
 from random import randint
 
 from faker import Faker
@@ -12,23 +11,26 @@ fake = Faker('uk-UA')
 
 
 def insert_groups():
-    for _ in range(1, 5):
+    for i in range(1, 5):
         group = Group(
+            id = i,
             group_name=fake.word(),
             )
         session.add(group)
 
 def insert_teachers():
-    for _ in range(1, 6):
+    for i in range(1, 6):
         teacher = Teacher(
+            id = i,
             fullname = fake.name(),
         )
         session.add(teacher)
 
 
 def insert_students():
-    for _ in range(1, 40):
+    for i in range(1, 40):
         student = Student(
+            id = i,
             student_name=fake.name(),
             group_id = randint(1,3),
         )
@@ -36,10 +38,11 @@ def insert_students():
 
 
 def insert_subjects():
-    for _ in range(1,7):
+    for i in range(1,7):
         subject = Subject(
+            id = i,
             subject = fake.word(),
-            teacher_id = randint(1, 6),
+            teacher_id = randint(1, 5),
         )
         session.add(subject)
 
