@@ -48,16 +48,20 @@ def insert_subjects():
 
 
 def insert_grades():
+    n=1
     for st in range(1,40):
         for su in range (1, 7):
             for i in range (1, 15):
                 grades = Grade(
-                grade = randint(1, 6),
+                id=n,
+                grade = randint(1, 5),
                 grade_date = fake.date_this_decade(),
                 student_id = st,
                 subjects_id = su,
                 )
-        session.add(grades)
+                n+=1
+                print (n)
+                session.add(grades)
 
 
 
